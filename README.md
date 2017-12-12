@@ -27,6 +27,3 @@ $ POST /api/customer/add
 $ PUT /api/customer/update/{id}
 $ DELETE /api/customer/delete/{id}
 ```
-# REST_exercise
-# REST_exercise
-# REST_exercise
