@@ -5,11 +5,14 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require_once '../vendor/autoload.php';
 require_once '../src/config/db.php';
 
+$dotenv = new Dotenv\Dotenv('../');
+$dotenv->load();
+
 $app = new \Slim\App;
 
 //JWT Middleware
 $app->add(new \Slim\Middleware\JwtAuthentication([
-    "secret" => "supersecretkeyyoushouldnotcommittogithub",
+    "secret" => $_ENV['SECRET'],
     "path" => "/api",
     "error" => function ($request, $response, $arguments) {
         $data["status"] = "error";

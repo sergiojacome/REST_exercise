@@ -5,7 +5,6 @@ use \Psr\Http\Message\ResponseInterface as Response;
 $app->options('/{routes:.+}', function ($request, $response, $args) {
     return $response;
 });
-
 $app->add(function ($req, $res, $next) {
     $response = $next($req, $res);
     return $response
@@ -20,7 +19,7 @@ $app->get('/api/customers', function(Request $request, Response $response){
 
     try{
         // Get DB Object
-        $db = new db();
+        $db = new db($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
         // Connect
         $db = $db->connect();
 

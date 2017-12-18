@@ -1,16 +1,21 @@
 <?php
-    class db{
-        // Properties
-        private $dbhost = '127.0.0.1';
-        private $dbuser = 'root';
-        private $dbpass = '';
-        private $dbname = 'slimapp';
+class db {
+    private $host;
+    private $db_name;
+    private $username;
+    private $password;
 
-        // Connect
-        public function connect(){
-            $mysql_connect_str = "mysql:host=$this->dbhost;dbname=$this->dbname";
-            $dbConnection = new PDO($mysql_connect_str, $this->dbuser, $this->dbpass);
-            $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $dbConnection;
-        }
+    function __construct($host, $db_name, $username, $password) {
+        $this->host = $host;
+        $this->db_name = $db_name;
+        $this->username = $username;
+        $this->password = $password;
     }
+    // Connect
+    public function connect(){
+        $mysql_connect_str = "mysql:host=$this->host;dbname=$this->db_name";
+        $dbConnection = new PDO($mysql_connect_str, $this->username, $this->dbpassword);
+        $dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $dbConnection;
+    }
+}
