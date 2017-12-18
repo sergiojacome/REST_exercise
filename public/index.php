@@ -10,6 +10,7 @@ $app = new \Slim\App;
 //JWT Middleware
 $app->add(new \Slim\Middleware\JwtAuthentication([
     "secret" => "supersecretkeyyoushouldnotcommittogithub",
+    "path" => "/api",
     "error" => function ($request, $response, $arguments) {
         $data["status"] = "error";
         $data["message"] = $arguments["message"];
