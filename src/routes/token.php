@@ -15,7 +15,7 @@ $app->get('/token', function (Request $request, Response $response) {
                             ->setExpiration(time() + 3600) // Configures the expiration time of the token (exp claim)
                             ->set('uid', 1) // Configures a new claim, called "uid"
                             ->set('isthisok','yes')
-                            ->sign($signer, 'supersecretkeyyoushouldnotcommittogithub') // creates a signature using "testing" as key
+                            ->sign($signer, $_ENV['SECRET']) // creates a signature using "testing" as key
                             ->getToken(); // Retrieves the generated token
     setcookie('token', $token, time() + (86400 * 30), "/"); // 86400 = 1 day
     echo $token;
