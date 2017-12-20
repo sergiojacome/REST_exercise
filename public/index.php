@@ -26,6 +26,9 @@ $app->add(new \Slim\Middleware\JwtAuthentication([
 //Token route
 require_once '../src/routes/token.php';
 
+//Faker route
+require_once '../src/routes/faker.php';
+
 // Customer Routes
 require_once '../src/routes/customers.php';
 
