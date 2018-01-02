@@ -15,7 +15,10 @@ $app->add(function ($req, $res, $next) {
 
 // Get All Customers
 $app->get('/api/customers', function(Request $request, Response $response){
-    $sql = "SELECT * FROM customers";
+    $page = ($request->getParam('page', 0) > 0) ? $request->getParam('page') : 1;
+    $limit = 10;
+    $start = ($limit*$page)-$limit;
+    $sql = "SELECT * FROM customers LIMIT $start, $limit";
 
     try{
         // Get DB Object
@@ -40,7 +43,7 @@ $app->get('/api/customer/{id}', function(Request $request, Response $response){
 
     try{
         // Get DB Object
-        $db = new db();
+        $db = new db($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
         // Connect
         $db = $db->connect();
 
@@ -68,7 +71,7 @@ $app->post('/api/customer/add', function(Request $request, Response $response){
 
     try{
         // Get DB Object
-        $db = new db();
+        $db = new db($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
         // Connect
         $db = $db->connect();
 
@@ -114,7 +117,7 @@ $app->put('/api/customer/update/{id}', function(Request $request, Response $resp
 
     try{
         // Get DB Object
-        $db = new db();
+        $db = new db($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
         // Connect
         $db = $db->connect();
 
@@ -145,7 +148,7 @@ $app->delete('/api/customer/delete/{id}', function(Request $request, Response $r
 
     try{
         // Get DB Object
-        $db = new db();
+        $db = new db($_ENV['DB_HOST'], $_ENV['DB_NAME'], $_ENV['DB_USER'], $_ENV['DB_PASSWORD']);
         // Connect
         $db = $db->connect();
 
